@@ -34,6 +34,7 @@
             <div class="bg-white p-6 rounded shadow">
                 <h3 class="font-bold mb-2">Quick Links</h3>
                 <a href="{{ route('medicines.index') }}" class="text-blue-600 underline">Manage Medicines</a>
+                <a href="{{ route('admin.orders.index') }}" class="text-blue-600 underline ml-4">Manage Orders</a>
             </div>
 
         </div>
