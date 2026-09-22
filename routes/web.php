@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\MedicineController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Customer\ShopController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::patch('/cart/{medicineId}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{medicineId}', [CartController::class, 'remove'])->name('cart.remove');
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {

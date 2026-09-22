@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="mt-4 text-right">
-                        <a href="#" class="bg-green-600 text-white px-6 py-2 rounded inline-block">
+                        <a href="{{ route('checkout.index') }}" class="bg-green-600 text-white px-6 py-2 rounded inline-block">
                             Proceed to Checkout
                         </a>
                     </div>
