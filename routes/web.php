@@ -17,8 +17,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $recentOrders = \App\Models\Order::where('user_id', auth()->id())->latest()->take(5)->get();
+    $cartCount = count(session('cart', []));
+
+    return view('dashboard', compact('recentOrders', 'cartCount'));
+})->middleware(['auth', 'verified'])->name('dashboard');        
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
