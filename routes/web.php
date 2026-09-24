@@ -11,7 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PrescriptionController;
 use App\Http\Controllers\Admin\DeliveryController;
-
+use App\Http\Controllers\Admin\ReportController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -53,6 +53,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('deliveries', [DeliveryController::class, 'index'])->name('admin.deliveries.index');
     Route::post('deliveries/{order}/assign', [DeliveryController::class, 'assign'])->name('admin.deliveries.assign');
     Route::patch('deliveries/{order}/status', [DeliveryController::class, 'updateStatus'])->name('admin.deliveries.update-status');
+
+    Route::get('reports', [ReportController::class, 'index'])->name('admin.reports.index');
 });
 
 require __DIR__.'/auth.php';
