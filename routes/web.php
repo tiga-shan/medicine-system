@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\PrescriptionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,6 +49,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::get('orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
     Route::patch('orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update-status');
+
+    Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('admin.prescriptions.index');
+    Route::patch('prescriptions/{prescription}/status', [PrescriptionController::class, 'updateStatus'])->name('admin.prescriptions.update-status');
 });
 });
 require __DIR__.'/auth.php';
