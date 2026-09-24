@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\MedicineController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Customer\ShopController;
@@ -17,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $recentOrders = \App\Models\Order::where('user_id', auth()->id())->latest()->take(5)->get();
+    $recentOrders = \App\Models\Order::where('user_id', Auth::id())->latest()->take(5)->get();
     $cartCount = count(session('cart', []));
 
     return view('dashboard', compact('recentOrders', 'cartCount'));
