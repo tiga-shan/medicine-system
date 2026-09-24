@@ -10,6 +10,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PrescriptionController;
+use App\Http\Controllers\Admin\DeliveryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,16 +43,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('medicines', MedicineController::class);
 
-    Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::resource('medicines', MedicineController::class);
-
     Route::get('orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::get('orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
     Route::patch('orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update-status');
 
     Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('admin.prescriptions.index');
     Route::patch('prescriptions/{prescription}/status', [PrescriptionController::class, 'updateStatus'])->name('admin.prescriptions.update-status');
+
+    Route::get('deliveries', [DeliveryController::class, 'index'])->name('admin.deliveries.index');
+    Route::post('deliveries/{order}/assign', [DeliveryController::class, 'assign'])->name('admin.deliveries.assign');
+    Route::patch('deliveries/{order}/status', [DeliveryController::class, 'updateStatus'])->name('admin.deliveries.update-status');
 });
-});
+
 require __DIR__.'/auth.php';
